@@ -19,7 +19,68 @@ const getSingle = async (req, res) => {
     });
 };
 
+const createUser = async (req, res) => {
+    console.log(req);
+    const user = {
+        user_id: req.body.user_id,
+        email: req.body.email,
+        name: req.body.name,
+        given_name: req.body.given_name,
+        family_name: req.body.family_name,
+        email: req.body.email,
+        last_ip: req.body.last_ip,
+        logins_count: req.body.logins_count,
+        created_at: req.body.created_at,
+        updated_at: req.body.updated_at,
+        last_login: req.body.last_login,
+        email_verified: req.body.email_verified
+    };
+    const response = await mongodb.getDatabase().db().collection('users').insertOne(user);
+    if(response.acknowledged > 0){
+        res.status(204).send();
+    }else{
+        res.status(500).json(response.error || 'Some error occured while creating the user.');
+    }
+};
+
+const updateUser = async (req, res) => {
+    const userId = new ObjectId(req.params.id);
+    const user = {
+        user_id: req.body.user_id,
+        email: req.body.email,
+        name: req.body.name,
+        given_name: req.body.given_name,
+        family_name: req.body.family_name,
+        email: req.body.email,
+        last_ip: req.body.last_ip,
+        logins_count: req.body.logins_count,
+        created_at: req.body.created_at,
+        updated_at: req.body.updated_at,
+        last_login: req.body.last_login,
+        email_verified: req.body.email_verified
+    };
+    const response = await mongodb.getDatabase().db().collection('users').replaceOne({_id:userId}, user);
+    if(response.modifiedCount > 0){
+        res.status(204).send();
+    }else{
+        res.status(500).json(response.error || 'Some error occured while updating the user.');
+    }
+};
+
+const deleteUser = async (req, res) => {
+    const userId = new ObjectId(req.params.id);
+    const response = await mongodb.getDatabase().db().collection('users').deleteOne({_id:userId});
+    if(response.modifiedCount > 0){
+        res.status(204).send();
+    }else{
+        res.status(500).json(response.error || 'Some error occured while deleting the user.');
+    }
+};
+
 module.exports = {
     getAll,
-    getSingle
+    getSingle,
+    createUser,
+    updateUser,
+    deleteUser
 };

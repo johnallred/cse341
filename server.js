@@ -1,9 +1,11 @@
 const express = require('express');
 const mongodb = require('./data/database');
+const bodyParser = require('body-parser');
 const app = express();
 
 const port = process.env.PORT || 3000;
 
+app.use(bodyParser.json());
 app.use('/', require('./routes'));
 
 mongodb.initDb((err) => {
@@ -13,4 +15,3 @@ mongodb.initDb((err) => {
         app.listen(port, () => {console.log(`DB is listening and node Running on port ${port}`)});
     }
 });
-

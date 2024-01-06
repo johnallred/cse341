@@ -1,0 +1,47 @@
+//Localhost
+### Get all users
+GET http://localhost:3000/users
+
+### Get user by id
+GET http://localhost:3000/users/6595ecfaf10f019b416cbc6e
+
+### Create User
+POST http://localhost:3000/users HTTP/1.1 
+content-type: application/json 
+
+{
+    "user_id": "12353ac3f38e84297c002546",
+    "email": "john@test.com",
+    "name": "john allred",
+    "given_name": "John",
+    "family_name": "Allred",
+    "nickname": "david",
+    "last_ip": "94.121.163.63",
+    "logins_count": 1,
+    "created_at": "2016-11-28T14:10:11.338Z",
+    "updated_at": "2016-12-02T01:17:29.310Z",
+    "last_login": "2016-12-02T01:17:29.310Z",
+    "email_verified": true
+}
+
+### Put User
+PUT http://localhost:3000/users/6595ecfaf10f019b416cbc6e HTTP/1.1 
+content-type: application/json 
+
+{
+    "user_id": "583c3ac3f38e84297c002546",
+    "email": "test@test.com",
+    "name": "test@test.com",
+    "given_name": "John",
+    "family_name": "Test",
+    "nickname": "test",
+    "last_ip": "94.121.163.63",
+    "logins_count": 15,
+    "created_at": "2016-11-28T14:10:11.338Z",
+    "updated_at": "2016-12-02T01:17:29.310Z",
+    "last_login": "2016-12-02T01:17:29.310Z",
+    "email_verified": true
+}
+
+### Delete User
+DELETE http://localhost:3000/users/65974602ba261cb3fa079714 HTTP/1.1
